@@ -35,7 +35,7 @@ const (
 	AppTitle
 	AppVersionCode
 	AppPackageName
-	InvokeFuntionArn
+	InvokeFunctionArn
 	FunctionName
 	FunctionVersion
 	LogGroupName
@@ -53,7 +53,7 @@ var DefaultNames = []string{
 	FunctionVersion:       "functionVersion",
 	LogGroupName:          "logGroupName",
 	LogStreamName:         "logStreamName",
-	InvokeFuntionArn:      "arn",
+	InvokeFunctionArn:     "arn",
 	CognitoIdentityID:     "cognitoIdentityId",
 	CognitoIdentityPoolID: "cognitoIdentityPoolId",
 	InstallationID:        "installationId",
@@ -136,7 +136,7 @@ func (lc *LambdaLogContext) WithOptions(opts ...Option) *LambdaLogContext {
 // WithBasic Add basic logging context
 // See ...
 func (lc *LambdaLogContext) WithBasic() *LambdaLogContext {
-	return lc.With(AwsRequestID, FunctionName, FunctionVersion, InvokeFuntionArn, LogGroupName, LogStreamName)
+	return lc.With(AwsRequestID, FunctionName, FunctionVersion, InvokeFunctionArn, LogGroupName, LogStreamName)
 }
 
 // WithAll Add all fields to  logging context
@@ -251,7 +251,7 @@ func Extract(ctx *lambdacontext.LambdaContext, field LambdaField) string {
 		return lambdacontext.FunctionName
 	case FunctionVersion:
 		return lambdacontext.FunctionVersion
-	case InvokeFuntionArn:
+	case InvokeFunctionArn:
 		return ctx.InvokedFunctionArn
 	case LogGroupName:
 		return lambdacontext.LogGroupName

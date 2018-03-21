@@ -14,7 +14,7 @@ import (
 
 // Create a new lambda log context and use RequestID... and a variable from environment
 var lambdazapper = lambdazap.New().
-	With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFuntionArn).
+	With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFunctionArn).
 	WithEnv("ZAP_TEST")
 var logger *zap.Logger
 
