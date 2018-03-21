@@ -56,7 +56,8 @@ logger.With(lambdazapper.NonContextValues()...))
 logger.Info("only non context values")
 ```
 
-The above will log FunctionName and FunctionVersion and *not* RequestId. *Note* by default all context and non context will be logged. 
+The above will log FunctionName and FunctionVersion and *not* RequestId. 
+*Note* by default all context and non context will be logged. 
 The option `lambdazap.ProcessNonContextFields(false)` will NOT log non context values (e.g. FunctionName) when used like this
 ```go
 logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues()...)
@@ -72,6 +73,7 @@ The Non Context Fields are
 
 ```
 
+See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml). 
 ### Prerequisites
 
 go 1.x
@@ -97,7 +99,7 @@ In the spirit of Uber's zap logger, zero allocations are used:
 
  | Type | Time | Objects Allocated |
  | :--- | :---: | :---: |
- | Non Context | 149 ns/op | 0 allocs/op
+ | Non Context | ~150 ns/op | 0 allocs/op
  | WithBasic | ~400 ns/op | 0 allocs/op
  | WithAll | ~733 ns/op | 0 allocs/op
 
@@ -116,7 +118,7 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 
 ## Acknowledgments
 
-* uber zap [zap][https://github.com/uber-go/zap]
+* [Uber zap][zap]
 
 [doc-img]: https://godoc.org/go.uber.org/zap?status.svg
 [doc]: https://godoc.org/go.uber.org/zap
