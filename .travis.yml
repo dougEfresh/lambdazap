@@ -3,9 +3,9 @@ sudo: false
 go:
 - 1.10.x
 before_install:
-- go install github.com/mattn/goveralls
-- go install github.com/axw/gocov/gocov
-- go install golang.org/x/tools/cmd/cover
+- go get github.com/mattn/goveralls
+- go get github.com/axw/gocov/gocov
+- go get golang.org/x/tools/cmd/cover
 os:
 - linux
 script:
