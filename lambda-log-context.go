@@ -16,7 +16,6 @@ package lambdazap
 
 import (
 	"context"
-	"fmt"
 	"os"
 
 	"github.com/aws/aws-lambda-go/lambdacontext"
@@ -165,7 +164,7 @@ func (lc *LambdaLogContext) With(fields ...LambdaField) *LambdaLogContext {
 		if int(f) >= staticStartIndex {
 			field := zap.String(lc.getName(f), Extract(dummyCtx, f))
 			if f == MemoryLimitInMB {
-				memAsStr = fmt.Sprintf("%d", lambdacontext.MemoryLimitInMB)
+				// Speical case : Memory is an int
 				field = zap.Int(lc.getName(f), lambdacontext.MemoryLimitInMB)
 			}
 			lc.staticFields = append(lc.staticFields, field)
@@ -243,8 +242,6 @@ func (lc *LambdaLogContext) WithCustom(names ...string) *LambdaLogContext {
 	return lc
 }
 
-var memAsStr = ""
-
 // Extract a field from lambda context
 func Extract(ctx *lambdacontext.LambdaContext, field LambdaField) string {
 	switch field {
@@ -272,8 +269,6 @@ func Extract(ctx *lambdacontext.LambdaContext, field LambdaField) string {
 		return ctx.ClientContext.Client.AppVersionCode
 	case AppPackageName:
 		return ctx.ClientContext.Client.AppPackageName
-	case MemoryLimitInMB:
-		return memAsStr
 	default:
 		return ""
 	}
