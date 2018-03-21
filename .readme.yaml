@@ -1,0 +1,59 @@
+title:
+  name: Lambda Zap
+  description: Add [AWS lamba context](https://github.com/aws/aws-lambda-go) fields to [uber's zap](https://github.com/uber-go/zap)
+user: dougEfresh
+project: lambdazap
+installation: >-
+  ```shell
+
+  $ go get -u github.com/dougEfresh/lambdazap
+
+  ```
+quickStart:
+  code: |
+    ```go
+
+    package main
+    import (
+        "context"
+
+        "github.com/aws/aws-lambda-go/lambda"
+        "github.com/dougEfresh/lambdazap"
+        "go.uber.org/zap"
+        "go.uber.org/zap/zapcore"
+    )
+
+    // Create a new lambda log context and use RequestID, FunctionName, InvokeFunctionArn and a variable from environment
+    var lambdazapper = lambdazap.New().
+        With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFunctionArn).
+        WithEnv("ZAP_TEST")
+
+    var logger *zap.Logger
+
+    func init() {
+        // Init the logger outside of the handler
+        logger, _ := zap.NewProduction()
+    }
+
+    func Handler(ctx context.Context) (string, error) {
+         defer logger.Sync()
+        logger.Info("Starting hander with context values ", lambdazapper.ContextValues(ctx)...)
+        return "Uber zap with lambda context", nil
+    }
+
+    func main() {
+        lambda.Start(Handler)
+    }
+
+    ```
+  description: ""
+examples:
+  - "See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml)."
+  - "[List of fields](https://godoc.org/github.com/dougEfresh/lambdazap#LambdaField)"
+tests:
+  - |
+    ```shell
+    $ go test -v
+
+    ```
+  - "See [travis.yaml](.travis.yml) for running benchmark tests"

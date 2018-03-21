@@ -4,43 +4,53 @@ Add [AWS lamba context](https://github.com/aws/aws-lambda-go) fields to [uber's 
 
 [![GoDoc][doc-img]][doc] [![Build Status][ci-img]][ci] [![Coverage Status][cov-img]][cov] [![Go Report][report-img]][report]
 
-## Getting Started
+## Installation 
+```shell
+$ go get -u github.com/dougEfresh/lambdazap
+```
+
+## Quick Start
 
 ```go
+
 package main
-
 import (
-	"context"
+    "context"
 
-	"github.com/aws/aws-lambda-go/lambda"
-	"github.com/dougEfresh/lambdazap"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
+    "github.com/aws/aws-lambda-go/lambda"
+    "github.com/dougEfresh/lambdazap"
+    "go.uber.org/zap"
+    "go.uber.org/zap/zapcore"
 )
 
 // Create a new lambda log context and use RequestID, FunctionName, InvokeFunctionArn and a variable from environment
 var lambdazapper = lambdazap.New().
-	With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFunctionArn).
-	WithEnv("ZAP_TEST")
-	
+    With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFunctionArn).
+    WithEnv("ZAP_TEST")
+
 var logger *zap.Logger
 
 func init() {
-	// Init the logger outside of the handler
-	logger, _ := zap.NewProduction()
+    // Init the logger outside of the handler
+    logger, _ := zap.NewProduction()
 }
 
 func Handler(ctx context.Context) (string, error) {
-	 defer logger.Sync()
-	logger.Info("Starting hander with context values ", lambdazapper.ContextValues(ctx)...)
-	return "Uber zap with lambda context", nil
+     defer logger.Sync()
+    logger.Info("Starting hander with context values ", lambdazapper.ContextValues(ctx)...)
+    return "Uber zap with lambda context", nil
 }
 
 func main() {
-	lambda.Start(Handler)
+    lambda.Start(Handler)
 }
 
 ```
+
+
+
+
+## Usage 
 
 There are some non-context fields such as FunctionName which you can add to all logging requests
 
@@ -68,30 +78,26 @@ The option `lambdazap.ProcessNonContextFields(false)` will NOT log non context v
 logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues()...)
 ```
 
-## Examples 
-
-See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml). 
-
+## Examples
+    
+See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml).
+    
 [List of fields](https://godoc.org/github.com/dougEfresh/lambdazap#LambdaField)
+
 
 ## Prerequisites
 
 go 1.x
 
-
-## Installing
-
+## Tests
+    
 ```shell
-$ go get -u github.com/dougEfresh/lambdazap
+$ go test -v
 
 ```
 
-## Tests 
-
-```shell
-$ go test -v 
-
-```
+    
+See [travis.yaml](.travis.yml) for running benchmark tests
 
 See [travis.yaml](.travis.yml) for running benchmark tests
 
@@ -124,8 +130,8 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 
 ### TODO 
 
-[doc-img]: https://godoc.org/github.com/dougefresh/lambdazap?status.svg
-[doc]: https://godoc.org/github.com/dougefresh/lambdazap
+[doc-img]: https://godoc.org/github.com/dougEfresh/lambdazap?status.svg
+[doc]: https://godoc.org/github.com/dougEfresh/lambdazap
 [ci-img]: https://travis-ci.org/dougEfresh/lambdazap.svg?branch=master
 [ci]: https://travis-ci.org/dougEfresh/lambdazap
 [cov-img]: https://codecov.io/gh/dougEfresh/lambdazap/branch/master/graph/badge.svg
