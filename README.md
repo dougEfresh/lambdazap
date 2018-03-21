@@ -1,6 +1,6 @@
 # Lamdbda Log zap
 
-Add [AWS lamba context][https://github.com/aws/aws-lambda-go] fields to [uber's zap][https://github.com/uber-go/zap]
+Add [AWS lamba context]https://github.com/aws/aws-lambda-go] fields to [uber's zap][https://github.com/uber-go/zap]
 [![Build Status](https://travis-ci.org/dougEfresh/logzio-go.svg?branch=master)](https://travis-ci.org/dougEfresh/logzio-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dougEfresh/logzio-go)](https://goreportcard.com/report/github.com/dougEfresh/logzio-go)
 [![GoDoc](https://godoc.org/github.com/dougEfresh/logzio-go?status.svg)](https://godoc.org/github.com/dougEfresh/logzio-go)
@@ -61,10 +61,9 @@ Give an example
 
 ## Deployment
 
-
-
 ## Contributing
  All PRs are welcome
+
 ## Authors
 
 * **Douglas Chimento** * - [dougEfresh](https://github.com/dougEfresh)
@@ -77,3 +76,12 @@ This project is licensed under the Apache License - see the [LICENSE.md](LICENSE
 
 * uber zap [zap][https://github.com/uber-go/zap]
 
+[doc-img]: https://godoc.org/go.uber.org/zap?status.svg
+[doc]: https://godoc.org/go.uber.org/zap
+[ci-img]: https://travis-ci.org/uber-go/zap.svg?branch=master
+[ci]: https://travis-ci.org/uber-go/zap
+[cov-img]: https://codecov.io/gh/uber-go/zap/branch/master/graph/badge.svg
+[cov]: https://codecov.io/gh/uber-go/zap
+[benchmarking suite]: https://github.com/uber-go/zap/tree/master/benchmarks
+[glide.lock]: https://github.com/uber-go/zap/blob/master/glide.lock
+[za]: [https://github.com/uber-go/zap
