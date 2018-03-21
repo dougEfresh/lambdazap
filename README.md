@@ -27,15 +27,9 @@ var logger *zap.Logger
 
 func init() {
 	// Init the logger outside of the handler
-	logger = getLogger()
+	logger, _ := zap.NewProduction()
 }
 
-func getLogger() *zap.Logger {
-	l, _ := zap.NewProduction()
-	return l
-}
-
-// Handler for lambda
 func Handler(ctx context.Context) (string, error) {
 	 defer logger.Sync()
 	logger.Info("Starting hander with context values ", lambdazapper.ContextValues(ctx)...)
