@@ -18,7 +18,7 @@ import (
 	"go.uber.org/zap/zapcore"
 )
 
-// Create a new lambda log context and use RequestID... and a variable from environment
+// Create a new lambda log context and use RequestID, FunctionName, InvokeFunctionArn and a variable from environment
 var lambdazapper = lambdazap.New().
 	With(lambdazap.AwsRequestID, lambdazap.FunctionName, lambdazap.InvokeFunctionArn).
 	WithEnv("ZAP_TEST")
@@ -72,7 +72,7 @@ logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues(
 
 See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml). 
 
-[]List of fields](https://godoc.org/github.com/dougEfresh/lambdazap#LambdaField)
+[List of fields](https://godoc.org/github.com/dougEfresh/lambdazap#LambdaField)
 
 ## Prerequisites
 
@@ -128,7 +128,7 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 [doc]: https://godoc.org/github.com/dougefresh/lambdazap
 [ci-img]: https://travis-ci.org/dougEfresh/lambdazap.svg?branch=master
 [ci]: https://travis-ci.org/dougEfresh/lambdazap
-[cov-img]: https://codecov.io/gh/dougEfresh/ldougEfresh/lambdazapambdazap/branch/master/graph/badge.svg
+[cov-img]: https://codecov.io/gh/dougEfresh/lambdazap/branch/master/graph/badge.svg
 [cov]: https://codecov.io/gh/dougEfresh/lambdazap
 [glide.lock]: https://github.com/uber-go/zap/blob/master/glide.lock
 [zap]: https://github.com/uber-go/zap
