@@ -140,7 +140,7 @@ func TestAllContext(t *testing.T) {
 	assert.Equal(t, "dummylog", tw.value["logGroupName"])
 	assert.Equal(t, "dummystream", tw.value["logStreamName"])
 	assert.Equal(t, "dummyarn", tw.value["arn"])
-	assert.Equal(t, "128", tw.value["memoryLimitInMB"])
+	assert.Equal(t, float64(128), tw.value["memoryLimitInMB"])
 	assert.Equal(t, "dummyinstallid", tw.value["installationId"])
 	assert.Equal(t, "dummytitle", tw.value["appTitle"])
 	assert.Equal(t, "dummyname", tw.value["appPackageName"])

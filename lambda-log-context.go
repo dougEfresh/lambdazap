@@ -159,14 +159,19 @@ var dummyCtx = &lambdacontext.LambdaContext{}
 // With Add these fields to context Add static fields if processNonContextValues is true
 func (lc *LambdaLogContext) With(fields ...LambdaField) *LambdaLogContext {
 	var ctxFieldIndex = len(lc.fields)
+
 	for _, f := range fields {
 		//		fmt.Fprintln(os.Stderr, "Adding field ", f, " index ", ctxFieldIndex)
 		if int(f) >= staticStartIndex {
 			field := zap.String(lc.getName(f), Extract(dummyCtx, f))
+			if f == MemoryLimitInMB {
+				memAsStr = fmt.Sprintf("%d", lambdacontext.MemoryLimitInMB)
+				field = zap.Int(lc.getName(f), lambdacontext.MemoryLimitInMB)
+			}
 			lc.staticFields = append(lc.staticFields, field)
 			if lc.processNonContextValues {
 				lc.ctxFields[int(f)] = ctxFieldIndex
-				lc.fields = append(lc.fields, zap.String(lc.getName(f), ""))
+				lc.fields = append(lc.fields, field)
 				ctxFieldIndex++
 			}
 		} else {
@@ -202,7 +207,9 @@ func (lc *LambdaLogContext) ContextValues(ctx context.Context) []zapcore.Field {
 	}
 	for k, v := range lc.ctxFields {
 		if k < int(END) {
-			lc.fields[v].String = lc.ContextValue(lcv, LambdaField(k))
+			if LambdaField(k) < staticStartIndex {
+				lc.fields[v].String = lc.ContextValue(lcv, LambdaField(k))
+			}
 		}
 		if k >= 200 {
 			//Custom fields start at 200
@@ -236,6 +243,8 @@ func (lc *LambdaLogContext) WithCustom(names ...string) *LambdaLogContext {
 	return lc
 }
 
+var memAsStr = ""
+
 // Extract a field from lambda context
 func Extract(ctx *lambdacontext.LambdaContext, field LambdaField) string {
 	switch field {
@@ -264,7 +273,7 @@ func Extract(ctx *lambdacontext.LambdaContext, field LambdaField) string {
 	case AppPackageName:
 		return ctx.ClientContext.Client.AppPackageName
 	case MemoryLimitInMB:
-		return fmt.Sprintf("%d", lambdacontext.MemoryLimitInMB)
+		return memAsStr
 	default:
 		return ""
 	}

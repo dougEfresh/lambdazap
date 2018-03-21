@@ -4,7 +4,7 @@ Add [AWS lamba context][https://github.com/aws/aws-lambda-go] fields to [uber's 
 [![Build Status](https://travis-ci.org/dougEfresh/logzio-go.svg?branch=master)](https://travis-ci.org/dougEfresh/logzio-go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dougEfresh/logzio-go)](https://goreportcard.com/report/github.com/dougEfresh/logzio-go)
 [![GoDoc](https://godoc.org/github.com/dougEfresh/logzio-go?status.svg)](https://godoc.org/github.com/dougEfresh/logzio-go)
-[![Coverage Status](https://coveralls.io/repos/github/dougEfresh/passwd-pot/badge.svg?branch=master)](https://coveralls.io/github/dougEfresh/passwd-pot?branch=master)
+[![codecov](https://codecov.io/gh/dougEfresh/lambdazap/branch/master/graph/badge.svg)](https://codecov.io/gh/dougEfresh/lambdazap)
 [![license](http://img.shields.io/badge/license-apache-red.svg?style=flat)](https://raw.githubusercontent.com/dougEfresh/logzio-go/master/LICENSE)
 
 
