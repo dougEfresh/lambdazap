@@ -3,10 +3,13 @@ sudo: false
 go:
 - 1.10.x
 before_install:
-- go get github.com/mattn/goveralls
-- go get golang.org/x/tools/cmd/cover
+- go install github.com/mattn/goveralls
+- go install github.com/axw/gocov/gocov
+- go install golang.org/x/tools/cmd/cover
 os:
 - linux
 script:
-- go test -v ./...  -covermode=count -coverprofile=coverage.out $HOME/gopath/bin/goveralls -coverprofile=coverage.out -service=travis-ci -repotoken $COVERALLS
-  
+- go build -race
+- go test -v ./...  -coverprofile=cover.out
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
