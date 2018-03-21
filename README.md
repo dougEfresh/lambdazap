@@ -51,13 +51,8 @@ logger.Info("only non context values")
 ```
 
 The above will log FunctionName and FunctionVersion and *not* RequestId. 
-*Note* by default all context and non context will be logged. 
-The option `lambdazap.ProcessNonContextFields(false)` will NOT log non context values (e.g. FunctionName) when used like this
-```go
-logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues()...)
-```
 
-The Non Context Fields are 
+The Non Context fields are 
 ```shell
 	FunctionName
 	FunctionVersion
@@ -67,8 +62,20 @@ The Non Context Fields are
 
 ```
 
+*Note* by default all context and non context will be logged. 
+The option `lambdazap.ProcessNonContextFields(false)` will NOT log non context values (e.g. FunctionName) when used like this
+```go
+logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues()...)
+```
+
+
+
+### Examples 
+
 See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml). 
-### Prerequisites
+
+
+## Prerequisites
 
 go 1.x
 
@@ -114,13 +121,12 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 
 * [Uber zap][zap]
 
-[doc-img]: https://godoc.org/go.uber.org/zap?status.svg
-[doc]: https://godoc.org/go.uber.org/zap
-[ci-img]: https://travis-ci.org/uber-go/zap.svg?branch=master
-[ci]: https://travis-ci.org/uber-go/zap
-[cov-img]: https://codecov.io/gh/uber-go/zap/branch/master/graph/badge.svg
-[cov]: https://codecov.io/gh/uber-go/zap
-[benchmarking suite]: https://github.com/uber-go/zap/tree/master/benchmarks
+[doc-img]: https://godoc.org/github.com/lambdazap?status.svg
+[doc]: https://godoc.org/github.com/lambdazap
+[ci-img]: https://travis-ci.org/dougEfresh/lambdazap.svg?branch=master
+[ci]: https://travis-ci.org/dougEfresh/lambdazap
+[cov-img]: https://codecov.io/gh/dougEfresh/ldougEfresh/lambdazapambdazap/branch/master/graph/badge.svg
+[cov]: https://codecov.io/gh/dougEfresh/lambdazap
 [glide.lock]: https://github.com/uber-go/zap/blob/master/glide.lock
 [zap]: https://github.com/uber-go/zap
 [me]: https://github.com/dougEfresh
