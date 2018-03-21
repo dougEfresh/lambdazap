@@ -1,4 +1,4 @@
-# Lamdbda Log zap
+# Lambda Zap
 
 Add [AWS lamba context](https://github.com/aws/aws-lambda-go) fields to [uber's zap](https://github.com/uber-go/zap)
 
@@ -50,7 +50,7 @@ logger.With(lambdazapper.NonContextValues()...))
 logger.Info("only non context values")
 ```
 
-The above will log FunctionName and FunctionVersion and *not* RequestId. 
+The above will log FunctionName and FunctionVersion but *not* RequestId. 
 
 The Non Context fields are 
 ```shell
@@ -68,19 +68,18 @@ The option `lambdazap.ProcessNonContextFields(false)` will NOT log non context v
 logger.Info("only context values. No FunctionName!", lambdazapper.ContextValues()...)
 ```
 
-
-
-### Examples 
+## Examples 
 
 See example [handler](test/handler.go) with [cloudformation](test/test-template.yaml). 
 
+[]List of fields](https://godoc.org/github.com/dougEfresh/lambdazap#LambdaField)
 
 ## Prerequisites
 
 go 1.x
 
 
-### Installing
+## Installing
 
 ```shell
 $ go get -u github.com/dougEfresh/lambdazap
@@ -93,6 +92,8 @@ $ go get -u github.com/dougEfresh/lambdazap
 $ go test -v 
 
 ```
+
+See [travis.yaml](.travis.yml) for running benchmark tests
 
 ## Benchmarks
 
@@ -121,8 +122,10 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 
 * [Uber zap][zap]
 
-[doc-img]: https://godoc.org/github.com/lambdazap?status.svg
-[doc]: https://godoc.org/github.com/lambdazap
+### TODO 
+
+[doc-img]: https://godoc.org/github.com/dougefresh/lambdazap?status.svg
+[doc]: https://godoc.org/github.com/dougefresh/lambdazap
 [ci-img]: https://travis-ci.org/dougEfresh/lambdazap.svg?branch=master
 [ci]: https://travis-ci.org/dougEfresh/lambdazap
 [cov-img]: https://codecov.io/gh/dougEfresh/ldougEfresh/lambdazapambdazap/branch/master/graph/badge.svg
