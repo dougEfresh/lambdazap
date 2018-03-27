@@ -1,6 +1,6 @@
 title:
   name: Lambda Zap
-  description: Add [AWS lamba context](https://github.com/aws/aws-lambda-go) fields to [uber's zap](https://github.com/uber-go/zap)
+  description: Add [AWS lamba context](https://github.com/aws/aws-lambda-go) fields to [Uber's Zap](https://github.com/uber-go/zap)
 user: dougEfresh
 project: lambdazap
 installation: >-
